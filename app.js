@@ -5,7 +5,7 @@ let league;
             console.log('league', league);
             if (league === "NBA") {
                 $('.teamOptions').html(`<select class='teamSelector' name='ChooseTeam'>
-                <option value='selection'>Select your team</option>
+                <option value='selection'>Select an NBA team</option>
                 <option value='atlanta-hawks'>Atlanta Hawks</option>
                 <option value='boston-celtics'>Boston Celtics</option>
                 <option value='brooklyn-nets'>Brooklyn Nets</option>
@@ -40,7 +40,7 @@ let league;
             }
             if (league === "NFL") {
                 $('.teamOptions').html(`<select class='teamSelector' name='ChooseTeam'>
-                <option value='selection'>Select your team</option>
+                <option value='selection'>Select an NFL team</option>
                 <option value='arizona-cardinals'>Arizona Cardinals</option>
                 <option value='atlanta-falcons'>Atlanta Falcons</option>
                 <option value='baltimore-ravens'>Baltimore Ravens</option>
@@ -77,7 +77,7 @@ let league;
             }
             if (league === "NHL") {
                 $('.teamOptions').html(`<select class='teamSelector' name='ChooseTeam'>
-                <option value='selection'>Select your team</option>
+                <option value='selection'>Select an NHL team</option>
                 <option value='anaheim-ducks'>Anaheim Ducks</option>
                 <option value='arizona-coyotes'>Arizona Coyotes</option>
                 <option value='boston-bruins'>Boston Bruins</option>
