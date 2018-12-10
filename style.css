@@ -85,6 +85,12 @@ table {
     width: 1px;
     visibility: hidden;
   }*/
+  #jumbotron {
+      width: 100%;
+  }
+  .card {
+      width: 100%;
+  }
   th {
       visibility: hidden;
   }
