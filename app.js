@@ -132,10 +132,19 @@ let league;
         let userLongitude;
 
         $('.submit').on('click', function () {
+
             let userDist = $('.userDist').val()
             console.log('userDist',userDist)
             let userZip = $('.zip').val();
-            console.log('userZip', userZip)
+            console.log('userZip', userZip);
+            /*if (userDist = NaN) {
+              console.log('invalid distance')
+            }
+            if (userZip.length !=5) {
+                console.log('invalid zip code');
+                $('.table').html("Please fill out all fields!")
+            }*/
+            
 
             let placeUrl = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=us&postalCode=" + userZip + "&key=6ZjigwGGx4YCL1iYYttvgO5TIAwXFL17";
             console.log(placeUrl)
@@ -153,11 +162,15 @@ let league;
                     url: url,
                     method: "GET"
                 }).then(data => {
-
+                    //console.log(data)
                 })
 
                 let userTeam = $('.teamSelector').val();
                 let arenaCoordinates = userTeam;
+
+                /*if (userTeam == undefined) {
+                    $('.table').html("Please fill out all fields!")
+                }*/
 
                 //Get each team arena's coordinates.
                 switch (arenaCoordinates) {
@@ -921,7 +934,7 @@ let league;
                 }
 
                 //Change slug to user team.
-                let teamUrl = "https://api.seatgeek.com/2/events?per_page=50&performers.slug=" + userTeam + "&client_id=MTQyMjQwNjN8MTU0Mzk1MjQxOS45OQ"
+                let teamUrl = "https://api.seatgeek.com/2/events?per_page=100&performers.slug=" + userTeam + "&client_id=MTQyMjQwNjN8MTU0Mzk1MjQxOS45OQ"
                 console.log(teamUrl);
                 let newArray = [];
                 $.ajax({
@@ -1069,8 +1082,12 @@ let league;
                         //<td>${p.driveTime}</td><th>Drive Time</th>
                         let tableHead = '<tr><th>Game</th><th>Date</th><th>Time</th><th>Location</th><th>Starting Ticket Price</th><th>Average Ticket Price</th><th>Distance</th><th>Find Tickets</th></tr>';
                         let createTable = '<table> ' + tableHead + rowItems.join('') + ' </table>';
+                        
                         $(".table").html(createTable);
-
+                        console.log('lessThanlenght',newArray.length)
+                        /*if (newArray.length < 1) {
+                            $('.table').html('Sorry, no upcoming games found!')
+                        }*/
                         $('.seatgeek').on('click', function () {
                             //console.log('SeatGeek clicked: ', this.id);
 
@@ -1140,7 +1157,7 @@ let league;
             $(".table").html("")
             $('.teamName').html("")
             $('.zip').val('')
-            initialize()
+            //initialize()
         })//reset
 
         $('#entercitystate').on('click', function () {
