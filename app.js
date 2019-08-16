@@ -1,8 +1,18 @@
 let league;
-        $('.choose').on('click', function () {
+
+function checkTabPress(e) {        
+    if (e.keyCode == 9) {
+     console.log("TAB")//call your function whenEmpty()
+    }
+}
+var body = document.querySelector('#pickLeague');
+body.addEventListener('keyup', checkTabPress);
+
+//wrap ALL of this in a function for people who tab between options?
+        $('.leagueSelector').on('click', function () {
             console.log('choose clicked');
             league = $('.leagueSelector').val();
-            console.log('league', league);
+            //console.log('league', league);
             if (league === "MLB") {
                 $('.teamOptions').html(`<select class='teamSelector' name='ChooseTeam'>
                 <option value='selection'>Select an MLB team</option>
@@ -167,11 +177,15 @@ let league;
         let userLongitude;
 
         $('.submit').on('click', function () {
-
+            let validator = $('.teamOptions').val().length;
+            if (validator < 1) {
+                console.log("NEED TO CHOOSE A TEAM")
+            }
+            //console.log($('.teamOptions').val().length, "team OPTIONS")
             let userDist = $('.userDist').val()
             console.log('userDist',userDist)
             let userZip = $('.zip').val();
-            console.log('userZip', userZip);
+            console.log('userZip', userZip.length);
             /*if (userDist = NaN) {
               console.log('invalid distance')
             }
@@ -179,7 +193,9 @@ let league;
                 console.log('invalid zip code');
                 $('.table').html("Please fill out all fields!")
             }*/
-            
+            if (userZip.length < 1 || userDist === "leagueSel") {
+                console.log('MISSING INFO')
+            }
 
             let placeUrl = "https://api.tomtom.com/search/2/structuredGeocode.json?countryCode=us&postalCode=" + userZip + "&key=6ZjigwGGx4YCL1iYYttvgO5TIAwXFL17";
             console.log(placeUrl)
@@ -1326,7 +1342,7 @@ let league;
                             venue: games[i].venue.name,
                             id: [i]
                         })//Push to array
-                        console.log('new array:', newArray)
+                        
 
                         lessThan = newArray.filter(obj => {
                             return obj.distance < userDist && obj.starting > 1 && obj.average > 1;
@@ -1335,7 +1351,8 @@ let league;
                         lessThan.sort(function (a, b) {
                             return parseFloat(a.distance) - parseFloat(b.distance);
                         });
-
+                        console.log(newArray)
+                        console.log('new array:', newArray)
                         let rowItems = lessThan.map(function (p) {
                             return `<tr><td>${p.game}</td>
                                     <td>${p.date}</td>
@@ -1349,15 +1366,17 @@ let league;
                                 <td><button class="seatgeek" id = "${p.id}"><a href="${p.url}" target="_blank">Visit SeatGeek</a></button></td>
                                 </tr>`;
                         });
+                        console.log('new array:', rowItems.length)
                         //<td>${p.driveTime}</td><th>Drive Time</th>
                         let tableHead = '<tr><th>Game</th><th>Date</th><th>Time</th><th>Location</th><th>Starting Ticket Price</th><th>Average Ticket Price</th><th>Distance</th><th>Find Tickets</th></tr>';
                         let createTable = '<table> ' + tableHead + rowItems.join('') + ' </table>';
                         
                         $(".table").html(createTable);
-                        console.log('lessThanlenght',newArray.length)
-                        /*if (newArray.length < 1) {
+                        //console.log('lessThanlenght',newArray.length)
+                        if (rowItems.length < 1) {
                             $('.table').html('Sorry, no upcoming games found!')
-                        }*/
+                            //console.log("No games found")
+                        }
                         $('.seatgeek').on('click', function () {
                             //console.log('SeatGeek clicked: ', this.id);
 
@@ -1419,7 +1438,9 @@ let league;
 
             })//Submit function
         })//SUBMIT
-
+        //========
+        //Reset dropdowns to default on click
+        //========
         $(".reset").on('click', function () {
             $('body').css('background', '#17408b'),
                 $('.card-header').css('background', '#c9082a');
@@ -1427,8 +1448,16 @@ let league;
             $(".table").html("")
             $('.teamName').html("")
             $('.zip').val('')
+            $('.teamOptions').empty()
+            displaymessage()
             //initialize()
         })//reset
+
+        //let's see how this goes...
+        function displaymessage() {
+            $("select").val("leagueSel");
+            console.log("displaymessage")
+        }
 
         $('#entercitystate').on('click', function () {
             //value = $('#goodwills').val();

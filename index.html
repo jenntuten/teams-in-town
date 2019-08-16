@@ -63,19 +63,23 @@
                             <option value='400'>400 miles</option>
                             <option value='500'>500 miles</option>
                         </select></p>
-            <p>Choose your league.</p>
-            <select class='leagueSelector' name='ChooseLeague'>
-                <option value='leagueSel'>Select your league</option>
+            <p>Choose your league and team:</p>
+            <!--<label for="leagueSelector">Choose a League</label>-->
+            <select class='leagueSelector' id = 'pickLeague' name='ChooseLeague'>
+                <option value='leagueSel'>Select League</option>
                 <option value='MLB'>MLB</option>
                 <option value='NBA'>NBA</option>
                 <option value='NFL'>NFL</option>
                 <option value='NHL'>NHL</option>
             </select>
-            <button class="choose">Set</button>
-            <!--Display appropriate dropdown and submit again-->
+            <!--<button class="choose">Set</button>
+            Display appropriate dropdown and submit again-->
+            <p>
             <div class="teamOptions"></div>
+            </p>
             <button class="submit">Submit</button>
             <button class="reset">Reset</button>
+            <div class="errorMsg"></div>
         </div>
         <!--Select league first, and submit-->
 
