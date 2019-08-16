@@ -9,8 +9,8 @@ var body = document.querySelector('#pickLeague');
 body.addEventListener('keyup', checkTabPress);
 
 //wrap ALL of this in a function for people who tab between options?
-        $('.leagueSelector').on('click', function () {
-            console.log('choose clicked');
+        $('.leagueSelector').change('click', function () {
+            console.log('choose league');
             league = $('.leagueSelector').val();
             //console.log('league', league);
             if (league === "MLB") {
